@@ -1,2 +1,1 @@
 # wireguard-docker
-WireGuard docker
