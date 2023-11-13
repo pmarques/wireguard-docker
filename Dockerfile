@@ -1,4 +1,4 @@
-FROM alpine:3.18.4@sha256:6ce9a9a256a3495ae60ab0059ed1c7aee5ee89450477f2223f6ea7f6296df555
+FROM alpine:3.18.4@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978
 
 VOLUME /etc/wireguard
 
