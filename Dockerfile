@@ -9,6 +9,7 @@ RUN apk add --no-cache \
 	wireguard-tools \
 	bind-tools \
 	iptables \
+	ip6tables \
 	inotify-tools \
 	net-tools \
 	libqrencode \
