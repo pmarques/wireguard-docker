@@ -4,10 +4,8 @@ name: Publish Container image to GH Packages
 on:
   pull_request:
     branches: [master]
-  push:
-    branches:
-      - '*'
-      - '!master'
+    paths-ignore:
+      - '*.md'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
@@ -38,6 +36,14 @@ jobs:
       - name: Install cosign
         uses: sigstore/cosign-installer@9614fae9e5c5eddabb09f90a270fcb487c9f7149 # v3.3.0
 
+      - name: Inspect builder
+        run: |
+          echo "Name:      ${{ steps.buildx.outputs.name }}"
+          echo "Endpoint:  ${{ steps.buildx.outputs.endpoint }}"
+          echo "Status:    ${{ steps.buildx.outputs.status }}"
+          echo "Flags:     ${{ steps.buildx.outputs.flags }}"
+          echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
         with:
@@ -52,6 +58,7 @@ jobs:
           context: .
           push: true
           sbom: true
+          platforms: linux/amd64,linux/arm64
           tags: ghcr.io/${{ github.repository }}/wireguard:${{ github.sha }}
 
       - name: Sign the images with GitHub OIDC Token
