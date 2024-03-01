@@ -57,7 +57,10 @@ jobs:
           push: true
           sbom: true
           platforms: linux/amd64,linux/arm64
-          tags: patrickfmarques/wireguard:1.0.0-${{ steps.datatime.outputs.DATETIME }}
+          tags: |
+            patrickfmarques/wireguard:1.0
+            patrickfmarques/wireguard:1.0.0
+            patrickfmarques/wireguard:1.0.0-${{ steps.datatime.outputs.DATETIME }}
 
       - name: Sign the images with GitHub OIDC Token
         env:
